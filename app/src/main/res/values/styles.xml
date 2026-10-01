@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- SOLUCIÓN DIRECTA DESDE EL TEMA -->
+        <item name="windowActionBarOverlay">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- MODIFICACIÓN DIRECTA DEL GROSOR -->
+        <!-- Puedes cambiar el "80dp" por el tamaño que tú prefieras (ej. 45dp para más delgada, 100dp para más gruesa) -->
+        <item name="actionBarSize">35dp</item>
+        <item name="android:actionBarSize">35dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="16dp"
+    tools:context=".MainActivity">
+
+    <!-- FILA 1, COLUMNA 1 -->
+    <Button
+        android:id="@+id/btnShareFiles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Share Files"
+        android:layout_margin="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnShimer" />
+
+    <!-- FILA 1, COLUMNA 2 -->
+    <Button
+        android:id="@+id/btnShimer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Shimer"
+        android:layout_margin="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnShareFiles"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- FILA 2, COLUMNA 1 (Abajo de btnShareFiles) -->
+    <Button
+        android:id="@+id/btnTres"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Botón 3"
+        android:layout_margin="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnShareFiles"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnCuatro" />
+
+    <!-- FILA 2, COLUMNA 2 (Abajo de btnShimer) -->
+    <Button
+        android:id="@+id/btnCuatro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Botón 4"
+        android:layout_margin="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnShimer"
+        app:layout_constraintStart_toEndOf="@+id/btnTres"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
