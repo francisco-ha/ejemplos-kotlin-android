@@ -1,6 +1,6 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    id("org.jetbrains.kotlin.android") // 1. Cambiado a la sintaxis moderna de Kotlin
 }
 
 android {
@@ -17,45 +17,40 @@ android {
     }
 
     buildTypes {
-        debug {
+        // 2. Corregido: En Kotlin DSL se usa 'getByName("debug")'
+        getByName("debug") {
             applicationIdSuffix = ".debug"
-            // Permite depurar el código con puntos de interrupción (breakpoints)
-            debuggable = true // Usualmente true para debug
+            isDebuggable = true // 3. Corregido: Se usa 'isDebuggable' en lugar de 'debuggable'
         }
         create("debug2") {
             initWith(getByName("debug"))
             applicationIdSuffix = ".anexo"
         }
-        release {
-            // Activa ProGuard/R8 para encoger y ofuscar el código (seguridad y peso)
-            minifyEnabled = false
+        // 4. Corregido: En Kotlin DSL se usa 'getByName("release")'
+        getByName("release") {
+            isMinifyEnabled = true // 5. Corregido: Se usa 'isMinifyEnabled'
+            isShrinkResources = true // 6. Corregido: Se usa 'isShrinkResources'
             proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
             )
         }
     }
-    // 🚀 AQUÍ ESTÁ LA SOLUCIÓN: Declarar la dimensión que usan tus flavors
-    flavorDimensions.add("version")
-    productFlavors{
-        create("freeVersion") {
-            // 2. Le asignas la dimensión correspondiente
-            dimension = "version"
 
-            // (Opcional) Configuración específica para la versión gratis
+    flavorDimensions.add("version")
+
+    productFlavors {
+        create("freeVersion") {
+            dimension = "version"
             applicationIdSuffix = ".free"
-            versionNameSuffix ="-free"
-            // Sintaxis corregida para Kotlin DSL
+            versionNameSuffix = "-free"
             buildConfigField("String", "URL", "\"develop.com\"")
             buildConfigField("boolean", "isAllow", "false")
         }
         create("premiumVersion") {
-            // 2. Le asignas la misma dimensión
             dimension = "version"
-
-            // (Opcional) Configuración específica para la versión de pago
             applicationIdSuffix = ".premium"
-            versionNameSuffix ="-premium"
+            versionNameSuffix = "-premium"
             buildConfigField("String", "URL", "\"producion.com\"")
             buildConfigField("boolean", "isAllow", "true")
         }
@@ -72,11 +67,17 @@ android {
 
     buildFeatures {
         viewBinding = true
-    }
-    // Agrega este bloque para habilitar BuildConfig
-    buildFeatures {
         buildConfig = true
+        compose = true
     }
+    composeOptions{
+        kotlinCompilerExtensionVersion = "1.4.3"
+
+    }
+    kotlin{
+        jvmToolchain { 8 }
+    }
+
 }
 
 dependencies {
@@ -97,12 +98,19 @@ dependencies {
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
-    //shimmer sustituto de progressbar
+    // Shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
+
+    // Jetpack Compose (Configuración correcta usando BOM)
+    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material:material")
+    implementation("androidx.compose.runtime:runtime")
+    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
-
 }

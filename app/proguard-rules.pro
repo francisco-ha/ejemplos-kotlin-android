@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#De la siguiente forma evitamos que se ofuzque la clase de response para no generar errores
+#Cuando se producen errores se puede generar un mapa de des-encriptado para convertir la informacion
+#Y que me pueda mostrar
+#keep package com.cursokotlin.retrofitkotlinexample.retrofit2.DogsResponse
