@@ -62,7 +62,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -75,7 +75,7 @@ android {
 
     }
     kotlin{
-        jvmToolchain { 8 }
+        jvmToolchain { 17 }
     }
 
 }
